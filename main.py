@@ -20,6 +20,7 @@ def pushbullet_message(title, body):
         raise Exception(resp.status_code)
     else:
         print ('Message sent') 
+        quit()
 
 
 url = "https://www.amazon.com/dp/B0815Y8J9N/ref=cm_sw_r_cp_apa_fabc_mCdPFbSG2B6PM"
@@ -31,15 +32,18 @@ driver.get(url)
 
 sleep(.00125)
 
-content = driver.page_source.encode('utf-8').strip()
+while True:
+    content = driver.page_source.encode('utf-8').strip()
 
-soup = BeautifulSoup(content, 'html.parser')
+    soup = BeautifulSoup(content, 'html.parser')
 
-thing = "nope"
-thing = soup.find(id = "availability")
+    thing = "nope"
+    thing = soup.find(id = "availability")
 
-if "Currently unavailable." not in str(thing):
-    pushbullet_message("Valk's CPU is OUT", "Go buy it")
-else:
-    print("Still nothing")
-driver.quit()
+    if "Currently unavailable."  in str(thing):
+        driver.quit()
+        pushbullet_message("Valk's CPU is OUT", "Go buy it")      
+    else:
+        print("Still nothing")
+
+    sleep(3600)
