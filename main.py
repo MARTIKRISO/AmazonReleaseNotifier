@@ -38,6 +38,8 @@ soup = BeautifulSoup(content, 'html.parser')
 thing = "nope"
 thing = soup.find(id = "availability")
 
-if "Currently unavailable." in str(thing):
+if "Currently unavailable." not in str(thing):
     pushbullet_message("Valk's CPU is OUT", "Go buy it")
+else:
+    print("Still nothing")
 driver.quit()
