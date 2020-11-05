@@ -3,10 +3,15 @@ from bs4 import BeautifulSoup
 from time import sleep
 import re, requests, json
 
+
+with open("token.txt", "r") as apitoken:
+    TOKEN = apitoken.read()
+
+
+
 #TODO: hide the token, fix the spaghetti, make it pretty, add comments
 def pushbullet_message(title, body):
     msg = {"type": "note", "title": title, "body": body}
-    TOKEN = 'o.MoZJR0ZUKK5Xn4un8VEEtf7QFIXpzfsu'
     resp = requests.post('https://api.pushbullet.com/v2/pushes', 
                          data=json.dumps(msg),
                          headers={'Authorization': 'Bearer ' + TOKEN,
