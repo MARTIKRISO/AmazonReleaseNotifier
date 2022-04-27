@@ -32,18 +32,7 @@ driver.get(url)
 
 sleep(.00125)
 
-while True:
-    content = driver.page_source.encode('utf-8').strip()
+content = driver.page_source.encode('utf-8').strip()
 
-    soup = BeautifulSoup(content, 'html.parser')
-
-    thing = "nope"
-    thing = soup.find(id = "availability")
-
-    if "Currently unavailable."  in str(thing):
-        driver.quit()
-        pushbullet_message("Valk's CPU is OUT", "Go buy it")      
-    else:
-        print("Still nothing")
-
-    sleep(3600)
+soup = BeautifulSoup(content, 'html.parser')
+print(soup)
